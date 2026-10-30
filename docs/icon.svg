@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Google Photos Category Cleaner">
+  <!-- Source of truth. Render PNGs with test/capture-docs.mjs; never ship bitmaps alone. -->
+  <rect width="512" height="512" rx="116" fill="#17181C"/>
+  <rect x="146" y="146" width="96" height="96" rx="20" fill="#ECEDEF"/>
+  <rect x="270" y="146" width="96" height="96" rx="20" fill="#ECEDEF"/>
+  <rect x="146" y="270" width="96" height="96" rx="20" fill="#ECEDEF"/>
+  <rect x="270" y="270" width="96" height="96" rx="20" fill="#ECEDEF"/>
+  <line x1="168" y1="352" x2="352" y2="168" stroke="#17181C" stroke-width="58" stroke-linecap="round"/>
+  <line x1="168" y1="352" x2="352" y2="168" stroke="#E8A33D" stroke-width="18" stroke-linecap="round"/>
+</svg>

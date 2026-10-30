@@ -1,5 +1,7 @@
 # Google Photos Category Cleaner
 
+<img src="docs/icon-512.png" alt="Google Photos Category Cleaner icon" width="96">
+
 An unpacked Chrome extension (Manifest V3) that selects everything on the current Google Photos
 grid and deletes it in batches. It drives the page with synthetic clicks — no Google API, no OAuth,
 no credentials, nothing leaves the browser.
@@ -22,6 +24,20 @@ Google Photos has no "select all" for a whole library, an album or the trash. Th
 
 Nothing runs on page load. The panel starts collapsed, and the two destructive buttons stay
 disabled until the arming checkbox is ticked.
+
+## Screenshots
+
+The panel with a selection in progress: Google's own counter reads 30, and the delete controls are
+still disabled because the arming box is unticked.
+
+![The Category Cleaner panel with 30 items selected](docs/screenshots/panel-1.0.0.png)
+
+The toolbar popup, which only explains the panel:
+
+![The Category Cleaner toolbar popup](docs/screenshots/popup-1.0.0.png)
+
+Both captures come from `test/fixture.html`, a synthetic grid, not a real account. How each image is
+taken, and how to retake it after a UI change, is recorded in [docs/screenshots.md](docs/screenshots.md).
 
 ## Install
 
@@ -111,8 +127,12 @@ fixture already proves the click chain end to end.
 manifest.json      MV3 manifest, one content script scoped to photos.google.com
 content.js         panel, page model, selection, delete, album walk
 popup.html/js      toolbar popup: what the panel is and how to show it
+icons/             PNG renders (16/32/48/128) wired into the manifest
+docs/icon.svg      icon source of truth; icon-512.png is the README mark
+docs/screenshots/  README images; provenance and re-capture notes in screenshots.md
 test/fixture.html  fake Google Photos grid with Bulgarian labels
 test/harness.mjs   drives the real script against the fixture over CDP
+test/capture-docs.mjs  renders the icons and retakes the README screenshots
 test/inject.mjs    injects content.js into a live page and runs a probe
 test/probe*.js     read-only probes used to learn and re-check the live DOM
 test/persist-test.mjs  proves whether an install survives a restart
