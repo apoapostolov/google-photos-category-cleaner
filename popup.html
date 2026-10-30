@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    width: 300px; margin: 0; padding: 14px 14px 12px;
+    font: 13px/1.45 ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+    background: Canvas; color: CanvasText;
+  }
+  h1 { font-size: 13px; margin: 0 0 6px; letter-spacing: .01em; }
+  p { margin: 0 0 9px; }
+  p.dim { opacity: .72; }
+  ol { margin: 0 0 10px; padding-left: 18px; }
+  li { margin-bottom: 3px; }
+  button {
+    width: 100%; padding: 8px 10px; font: inherit; font-weight: 600;
+    border: 1px solid color-mix(in srgb, CanvasText 25%, transparent);
+    border-radius: 8px; background: color-mix(in srgb, CanvasText 7%, Canvas);
+    color: inherit; cursor: pointer;
+  }
+  button:hover { background: color-mix(in srgb, CanvasText 13%, Canvas); }
+  #status { margin-top: 9px; font-size: 12px; opacity: .75; min-height: 1.4em; }
+</style>
+</head>
+<body>
+  <h1>Category Cleaner</h1>
+  <p class="dim">The control panel floats at the bottom right of every photos.google.com page.</p>
+  <ol>
+    <li>Open the grid you want (album, Documents folder, Trash, Library).</li>
+    <li><b>Scan</b> to see what the page offers.</li>
+    <li><b>Select all</b> — dry run, nothing is deleted.</li>
+    <li><b>Delete selected</b> — one batch.</li>
+  </ol>
+  <button id="show">Show the panel on this page</button>
+  <p id="status"></p>
+  <script src="popup.js"></script>
+</body>
+</html>

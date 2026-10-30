@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fixture — Google Photos grid</title>
+<style>
+  body { margin: 0; font: 14px system-ui; }
+  #scroller { height: 600px; overflow-y: auto; }
+  #grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; padding: 4px; }
+  .tile { position: relative; }
+  .tile img { width: 100%; height: 90px; object-fit: cover; display: block; background: #ccc; }
+  .cb { position: absolute; top: 4px; left: 4px; width: 18px; height: 18px; background: rgba(0,0,0,.45); border-radius: 50%; }
+  .cb[aria-checked="true"] { background: #1a73e8; }
+  [role="toolbar"] { display: flex; gap: 10px; align-items: center; padding: 8px; background: #eee; }
+  #dialog { position: fixed; inset: 0; display: none; place-items: center; background: rgba(0,0,0,.4); }
+  #dialog[data-open] { display: grid; }
+  #dialog .box { background: #fff; padding: 18px; border-radius: 10px; min-width: 260px; }
+</style>
+</head>
+<body>
+  <!-- Bulgarian labels on purpose: the account's UI language must not break the selectors. -->
+  <div role="toolbar" id="bar">
+    <div role="checkbox" id="selectall" aria-label="Избери всички 30 елемента" aria-checked="false" tabindex="0"></div>
+    <button aria-label="Споделяне">Споделяне</button>
+    <button aria-label="Изтриване">Изтриване</button>
+    <button aria-label="Отказ">Отказ</button>
+  </div>
+  <div id="scroller"><div id="grid"></div></div>
+
+  <div role="dialog" id="dialog">
+    <div class="box">
+      <p>Да преместя ли в кошчето?</p>
+      <button aria-label="Отказ">Отказ</button>
+      <button aria-label="Премести в кошчето">Премести в кошчето</button>
+    </div>
+  </div>
+
+<script>
+  const N = 30;
+  const grid = document.getElementById('grid');
+  for (let i = 0; i < N; i++) {
+    const tile = document.createElement('div');
+    tile.className = 'tile';
+    tile.setAttribute('jsaction', 'click:tile');
+    tile.innerHTML = `<a href="/photo/${i}"><img alt="photo ${i}"></a>
+      <div class="cb" role="checkbox" aria-label="Избор на снимка ${i}" aria-checked="false" tabindex="0"></div>`;
+    grid.appendChild(tile);
+  }
+  // Selection toggling, exactly like the real grid.
+  document.addEventListener('click', (e) => {
+    const cb = e.target.closest('.cb');
+    if (cb) {
+      cb.setAttribute('aria-checked', cb.getAttribute('aria-checked') === 'true' ? 'false' : 'true');
+      e.preventDefault();
+      return;
+    }
+    if (e.target.id === 'selectall') {
+      const on = e.target.getAttribute('aria-checked') !== 'true';
+      e.target.setAttribute('aria-checked', String(on));
+      document.querySelectorAll('.cb').forEach((c) => c.setAttribute('aria-checked', String(on)));
+      return;
+    }
+    if (e.target.getAttribute('aria-label') === 'Изтриване' && e.target.closest('[role="toolbar"]')) {
+      document.getElementById('dialog').setAttribute('data-open', '');
+      return;
+    }
+    if (e.target.closest('#dialog') && /Премести|Изтриване/.test(e.target.getAttribute('aria-label') || '')) {
+      window.__deleted = (window.__deleted || 0) + document.querySelectorAll('.cb[aria-checked="true"]').length;
+      document.querySelectorAll('.cb[aria-checked="true"]').forEach((c) => c.closest('.tile').remove());
+      document.getElementById('dialog').removeAttribute('data-open');
+      return;
+    }
+    if (e.target.closest('#dialog')) document.getElementById('dialog').removeAttribute('data-open');
+  });
+</script>
+</body>
+</html>

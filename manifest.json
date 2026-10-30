@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Google Photos Category Cleaner",
+  "version": "1.0.0",
+  "description": "Selects everything on a Google Photos page and deletes it in batches, for emptying Documents categories, albums and Trash.",
+  "minimum_chrome_version": "111",
+  "content_scripts": [
+    {
+      "matches": ["https://photos.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "action": {
+    "default_title": "Photos Bulk",
+    "default_popup": "popup.html"
+  }
+}
