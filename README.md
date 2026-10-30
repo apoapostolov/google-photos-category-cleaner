@@ -1,6 +1,6 @@
-# Google Photos Category Cleaner
+![Google Photos Category Cleaner: empty a category in one pass](docs/hero.png)
 
-<img src="docs/icon-512.png" alt="Google Photos Category Cleaner icon" width="96">
+# Google Photos Category Cleaner
 
 An unpacked Chrome extension (Manifest V3) that selects everything on the current Google Photos
 grid and deletes it in batches. It drives the page with synthetic clicks — no Google API, no OAuth,

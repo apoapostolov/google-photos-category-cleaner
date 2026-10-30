@@ -51,8 +51,8 @@ async function openTab(page) {
   return call;
 }
 
-async function shoot(call, width, height, outPath) {
-  await call('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 2, mobile: false });
+async function shoot(call, width, height, outPath, dpr = 2) {
+  await call('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: dpr, mobile: false });
   await sleep(400);
   const shot = await call('Page.captureScreenshot', { format: 'png' });
   writeFileSync(outPath, Buffer.from(shot.data, 'base64'));
@@ -146,6 +146,12 @@ try {
   const popup = await openTab(`chrome-extension://${loaded.id}/popup.html`);
   await sleep(700);
   await shoot(popup, 340, 420, join(SHOTS, `popup-${VERSION}.png`));
+
+  // ---- hero banner: product-proof, 1280x640, composed from the icon and the panel shot
+  // 1x on purpose: the template's measured constant is 1280x640.
+  const hero = await openTab(fileUrl(join(ROOT, 'docs', 'hero.html')));
+  await sleep(800);
+  await shoot(hero, 1280, 640, join(ROOT, 'docs', 'hero.png'), 1);
 
   console.log('\nreproduce: node test/capture-docs.mjs');
 } catch (e) {

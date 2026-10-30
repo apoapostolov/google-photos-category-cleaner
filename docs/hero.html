@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hero</title>
+<!-- product-proof v0.1, per templates/product-proof.md
+     1280x640, 40/60 split, flat #0f0f0f, one accent (#E8A33D) on the logo mark and the frame
+     border, headline 6 words in two left-aligned lines, real UI on the right. Rendered by
+     test/capture-docs.mjs; do not hand-crop. -->
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1280px; height: 640px; }
+  body {
+    background: #0f0f0f;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .left {
+    position: absolute; left: 80px; top: 0; width: 560px; height: 640px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .lockup { display: flex; align-items: center; gap: 18px; margin-bottom: 46px; }
+  .lockup img { width: 76px; height: 76px; display: block; }
+  .lockup .name { font-size: 27px; font-weight: 600; letter-spacing: -0.01em; color: #ecedef; }
+  h1 { font-size: 58px; line-height: 1.12; font-weight: 700; letter-spacing: -0.025em; }
+  h1 span { display: block; white-space: nowrap; }
+  .frame {
+    position: absolute; left: 767px; top: 70px; width: 386px; height: 500px;
+    border: 8px solid #e8a33d; border-radius: 26px;
+    background: #14161a;
+    display: grid; place-items: center;
+  }
+  /* The panel PNG carries 26px of transparent padding on every side, so centring the image
+     centres the visible card. No manual offsets. */
+  .frame img { width: 330px; height: auto; display: block; }
+</style>
+</head>
+<body>
+  <div class="left">
+    <div class="lockup">
+      <img src="icon.svg" alt="">
+      <div class="name">Category Cleaner</div>
+    </div>
+    <h1><span>Empty a category</span><span>in one pass</span></h1>
+  </div>
+
+  <div class="frame">
+    <img src="screenshots/panel-1.0.0.png" alt="The Category Cleaner panel">
+  </div>
+</body>
+</html>
